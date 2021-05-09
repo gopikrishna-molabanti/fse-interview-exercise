@@ -24,7 +24,29 @@ const EligibilityApplication = () => {
       email: "",
       address: "",
     },
-    onSubmit: (values) => console.log(values),
+    onSubmit: (values) => {
+      console.log(values)
+      fetch('http://localhost:8080/eligibility/check', {
+        method: 'post',
+        headers: new Headers({
+          'content-type': 'application/json',
+          'Accept': 'application/json'
+        }),
+        mode: 'cors',
+        body: JSON.stringify({
+          name: values.name,
+          email: values.email,
+          address: values.address
+        }),
+      }).then(response => response.json())
+          .then(data => {
+            console.log('Success:', data);
+            console.log('TODO: render data to EligibilityResults.tsx file');
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+    }
   });
   return (
     <FormWrapper>
