@@ -33,5 +33,13 @@ public final class Applicant {
 	public String getEmail() {
 		return email;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Applicant{" +
+				"name='" + name + '\'' +
+				", address='" + address + '\'' +
+				", email='" + email + '\'' +
+				'}';
+	}
 }

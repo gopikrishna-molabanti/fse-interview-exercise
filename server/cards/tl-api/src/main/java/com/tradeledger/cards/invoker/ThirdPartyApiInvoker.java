@@ -1,6 +1,8 @@
 package com.tradeledger.cards.invoker;
 
 import com.tradeledger.cards.common.Applicant;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
@@ -12,6 +14,8 @@ import java.util.Objects;
 
 @Component
 public class ThirdPartyApiInvoker {
+
+    Logger logger = LoggerFactory.getLogger(ThirdPartyApiInvoker.class);
 
     private RestTemplate restTemplate;
 
@@ -30,7 +34,8 @@ public class ThirdPartyApiInvoker {
             responseEntity = restTemplate.exchange(thirdPartyApiUri,
                     HttpMethod.POST, requestEntity, ThirdPartyEligibilityCheckResponse.class);
             return processResponse(responseEntity);
-        } catch(Exception e) {
+        } catch (Exception e) {
+            logger.error("Exception occurred while invoking 3rd party api.", e);
             return null;
         }
 
