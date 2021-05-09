@@ -1,0 +1,3 @@
+rootProject.name = 'cards'
+include 'thirdparty'
+include 'tl-api'
